@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>DataSet</title>
+</head>
+<body>
+
+<h1>Data</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>App Name</th>
+            <th>App Id</th>
+            <th>Category</th>
+            <th>Rating</th>
+            <th>Is Free</th>
+            <th>Price</th>
+            <th>Size</th>
+            <th>Minimum Android Version</th>
+            <th>Developer Id</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entry : ${dataAll}">
+        <td th:text="${entry.appName}"></td>
+        <td th:text="${entry.appId}"></td>
+        <td th:text="${entry.category}"></td>
+        <td th:text="${entry.rating}"></td>
+        <td th:text="${entry.free}"></td>
+        <td th:text="${entry.price}"></td>
+        <td th:text="${entry.size}"></td>
+        <td th:text="${entry.androidVersion}"></td>
+        <td th:text="${entry.developerId}"></td>
+        <td>
+            <a th:href="@{/data/updateDataEntry(id=${entry.id})}">Update</a>
+            <a th:href="@{/data/deleteDataEntry(id=${entry.id})}">Delete</a>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

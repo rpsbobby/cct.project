@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome | Home</title>
+</head>
+<body>
+
+<h1> Hello From Landing Page</h1>
+
+<a href="/login">Login</a>
+<a href="/singUp">Sign Up</a>
+
+<form action="#" th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout">
+</form>
+
+</body>
+</html>
