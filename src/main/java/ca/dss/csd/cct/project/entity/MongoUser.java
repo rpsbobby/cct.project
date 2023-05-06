@@ -1,6 +1,7 @@
 package ca.dss.csd.cct.project.entity;
 
 import jakarta.validation.constraints.NotNull;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,8 +15,8 @@ import java.util.Set;
 @Document(collection = "users")
 public class MongoUser {
 
-    @Id
-    private String id;
+    @MongoId
+    private ObjectId id;
     @Indexed(unique = true)
     private String username;
     @NotNull
@@ -25,11 +26,11 @@ public class MongoUser {
     public MongoUser() {
     }
 
-    public String getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

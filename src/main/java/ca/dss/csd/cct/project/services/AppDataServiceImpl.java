@@ -5,6 +5,7 @@ import ca.dss.csd.cct.project.repositories.AppDataRepository;
 import ca.dss.csd.cct.project.repositories.AppDataTemplateRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -25,10 +26,15 @@ public class AppDataServiceImpl implements AppDataService {
         this.template = template;
     }
 
-
     @Override
     public List<AppData> findAll() {
-        return repository.findAll(Pageable.ofSize(defaultPageSize)).stream().toList();
+        return repository.findAll();
+    }
+
+    @Override
+    public List<AppData> findAll(int pageNumber) {
+        PageRequest request = PageRequest.of(pageNumber, defaultPageSize);
+        return repository.findAll(request).toList();
     }
 
     @Override

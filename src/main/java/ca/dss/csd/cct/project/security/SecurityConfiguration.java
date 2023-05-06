@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/data/**").hasAuthority("USER")
                         .requestMatchers("/api/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
-                .formLogin(form -> form.loginPage("/login").loginProcessingUrl("/authenticate").permitAll().defaultSuccessUrl("/data/findAll/0"))
+                .formLogin(form -> form.loginPage("/login").loginProcessingUrl("/authenticate").permitAll().defaultSuccessUrl("/data/getAll"))
                 .logout(LogoutConfigurer::permitAll);
         return security.build();
     }

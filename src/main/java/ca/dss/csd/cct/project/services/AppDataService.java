@@ -7,6 +7,7 @@ import java.util.List;
 public interface AppDataService {
 
     List<AppData> findAll();
+    List<AppData> findAll(int pageNumber);
 
     //    List<AppData> findAll(Integer pageNo);
     AppData findById(String id);
