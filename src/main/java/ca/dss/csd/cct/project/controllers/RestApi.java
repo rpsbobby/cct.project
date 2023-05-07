@@ -2,6 +2,8 @@ package ca.dss.csd.cct.project.controllers;
 
 import ca.dss.csd.cct.project.entity.Log;
 import ca.dss.csd.cct.project.services.AppDataService;
+import ca.dss.csd.cct.project.services.LogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,19 +15,20 @@ import java.util.List;
 @RequestMapping("/api")
 public class RestApi {
 
-    private AppDataService appDataService;
+    private LogService logs;
+
+    @Autowired
+    public RestApi(LogService logs) {
+        this.logs = logs;
+    }
+
+
 
 
     @GetMapping("/findAll")
     public List<Log> getLogs() {
-        List<Log> logs = new ArrayList<>();
-        Log log = new Log();
-        log.setMessage("Log one");
-        logs.add(log);
-        log = new Log();
-        log.setMessage("Log Two");
-        logs.add(log);
-        return logs;
+        return logs.findAll();
     }
 
 }
+

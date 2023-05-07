@@ -1,55 +1,132 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {background-color: #111827;}
+    </style>
     <meta charset="UTF-8">
     <title>Data Entry Form</title>
 </head>
 <body>
+<div class="bg-gray-50 dark:bg-gray-900">
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <div  class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    Update
+                </h1>
 
-<h3>Data Entry</h3>
-
-<form action="#" th:action="@{/data/save}" th:object="${appData}" method="POST">
-
-    <input type="hidden" th:field="*{id}">
-    <input type="hidden" th:field="*{size}">
-    <p>
-        <span th:errors="*{appName}" th:if="${#fields.hasErrors('appName')}"/>
-        <input type="text" th:field="*{appName}" placeholder="App Name">
-    </p>
-    <p>
-        <span th:errors="*{appId}" th:if="${#fields.hasErrors('appId')}"/>
-        <input type="text" th:field="*{appId}" placeholder="AppId">
-    </p>
-    <p>
-        <span th:errors="*{category}" th:if="${#fields.hasErrors('category')}"/>
-        <input type="text" th:field="*{category}" placeholder="Category">
-    </p>
-    <p>
-        <span th:errors="*{rating}" th:if="${#fields.hasErrors('rating')}"/>
-        <input type="text" th:field="*{rating}" placeholder="Rating">
-    </p>
-    <p>
-        <span th:errors="*{free}" th:if="${#fields.hasErrors('free')}"/>
-        <input type="text" th:field="*{free}" placeholder="Free">
-    </p>
-    <p>
-        <span th:errors="*{price}" th:if="${#fields.hasErrors('price')}"/>
-        <input type="text" th:field="*{price}" placeholder="Price">
-    </p>
-    <p>
-        <span th:errors="*{androidVersion}" th:if="${#fields.hasErrors('androidVersion')}"/>
-        <input type="text" th:field="*{androidVersion}" placeholder="Minimum Android Version">
-    </p>
-    <p>
-        <span th:errors="*{developerId}" th:if="${#fields.hasErrors('developerId')}"/>
-        <input type="text" th:field="*{developerId}" placeholder="Developer Id">
-    </p>
-
-    <button type="submit">Save</button>
-
-
-</form>
-
+                <form class="space-y-4 md:space-y-6" action="#" th:action="@{/data/save}" th:object="${appData}" method="POST">
+                    <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{size}">
+<!--                    app name-->
+                    <div>
+                        <span class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-xs dark:text-white"  th:errors="*{appName}" th:if="${#fields.hasErrors('appName')}"/>
+                        <label for="appName"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">AppName</label>
+                        <input type="text" th:field="*{appName}" name="username" id="appName"
+                               class="bg-gray-50 border border-gray-300 text-gray-900
+                                   sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+                                   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                               placeholder="AppName">
+                    </div>
+<!--                    app id-->
+                    <div>
+                        <span  th:errors="*{appId}" th:if="${#fields.hasErrors('appId')}"
+                               class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-xs dark:text-white"/>
+                        <label for="appId"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">App Id</label>
+                        <input type="text" th:field="*{appId}" name="username"  placeholder="AppName"
+                               id="appId" class="bg-gray-50 border border-gray-300 text-gray-900
+                                   sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+                                   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+<!--                   category -->
+                    <div>
+                        <span  th:errors="*{category}" th:if="${#fields.hasErrors('category')}"
+                               class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-xs dark:text-white"/>
+                        <label for="category"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                        <input type="text" th:field="*{category}" placeholder="Category"
+                               id="category" class="bg-gray-50 border border-gray-300 text-gray-900
+                                   sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+                                   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+<!--                    rating-->
+                    <div>
+                        <span th:errors="*{rating}" th:if="${#fields.hasErrors('rating')}"
+                               class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-xs dark:text-white"/>
+                        <label for="rating"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Rating</label>
+                        <input type="text" th:field="*{rating}" placeholder="Rating"
+                               id="rating" class="bg-gray-50 border border-gray-300 text-gray-900
+                                   sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+                                   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+<!--                    free-->
+                    <div>
+                        <span th:errors="*{free}" th:if="${#fields.hasErrors('free')}"
+                              class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-xs dark:text-white"/>
+                        <label for="free"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Free</label>
+                        <input type="text" th:field="*{free}" placeholder="Free"
+                               id="free" class="bg-gray-50 border border-gray-300 text-gray-900
+                                   sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+                                   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+<!--                    price-->
+                    <div>
+                        <span th:errors="*{price}" th:if="${#fields.hasErrors('price')}"
+                        class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-xs dark:text-white"/>
+                        <label for="price"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                        <input type="text" th:field="*{price}" placeholder="Price"
+                               id="price" class="bg-gray-50 border border-gray-300 text-gray-900
+                                   sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+                                   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+<!--                    version-->
+                    <div>
+                        <span th:errors="*{androidVersion}" th:if="${#fields.hasErrors('androidVersion')}"
+                              class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-xs dark:text-white"/>
+                        <label for="androidVersion"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Minimum Android Version</label>
+                        <input type="text" th:field="*{androidVersion}" placeholder="Minimum Android Version"
+                               id="androidVersion" class="bg-gray-50 border border-gray-300 text-gray-900
+                                   sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+                                   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+<!--                    devid-->
+                    <div>
+                        <span th:errors="*{developerId}" th:if="${#fields.hasErrors('developerId')}"
+                              class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-xs dark:text-white"/>
+                        <label for="developerId"
+                               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Developer ID</label>
+                        <input type="text" th:field="*{developerId}" placeholder="Developer Id"
+                               id="developerId" class="bg-gray-50 border border-gray-300 text-gray-900
+                                   sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
+                                   block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
+                                   dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    </div>
+                    <button class="w-full text-white bg-primary-600
+                                hover:bg-primary-700 focus:ring-4 focus:outline-none
+                                focus:ring-primary-300 font-medium rounded-lg text-sm
+                                px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700
+                                dark:focus:ring-primary-800" type="submit">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+</div>
 
 </body>
 </html>

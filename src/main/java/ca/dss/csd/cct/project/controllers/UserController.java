@@ -1,7 +1,10 @@
 package ca.dss.csd.cct.project.controllers;
 
+import ca.dss.csd.cct.project.entity.Log;
 import ca.dss.csd.cct.project.entity.MongoUser;
 import ca.dss.csd.cct.project.exceptions.UserException;
+import ca.dss.csd.cct.project.services.LogService;
+import ca.dss.csd.cct.project.services.LogServiceImpl;
 import ca.dss.csd.cct.project.services.MongoUserDetailService;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.Valid;
@@ -17,16 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class UserController {
 
     private MongoUserDetailService userService;
+    private LogService logService;
 
     @Autowired
-    public UserController(MongoUserDetailService service) {
+    public UserController(MongoUserDetailService service, LogService logService) {
         this.userService = service;
+        this.logService = logService;
     }
 
-
-    @PostConstruct
-    public void test() {
-    }
 
     @GetMapping("/")
     public String getIndexPage() {
@@ -51,6 +52,7 @@ public class UserController {
         }
         try {
             MongoUser saved = userService.saveUser(user);
+            logService.logNewUser(user);
         } catch (UserException e) {
             model.addAttribute("error", e.getMessage());
             return "newUserForm";

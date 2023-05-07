@@ -3,6 +3,8 @@ package ca.dss.csd.cct.project.controllers;
 import ca.dss.csd.cct.project.entity.AppData;
 import ca.dss.csd.cct.project.repositories.AppDataTemplateRepository;
 import ca.dss.csd.cct.project.services.AppDataService;
+import ca.dss.csd.cct.project.services.AppDataServiceImpl;
+import ca.dss.csd.cct.project.services.LogService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Optionals;
@@ -24,13 +26,15 @@ import java.util.Optional;
 public class AppDataController {
 
     private AppDataService appDataService;
-    private AppDataTemplateRepository appDataTemplateRepository;
+    private AppDataServiceImpl appDataTemplateRepository;
+    private LogService logService;
     private int currentPage = 1; // default
 
     @Autowired
-    public AppDataController(AppDataService appDataService, AppDataTemplateRepository appDataTemplateRepository) {
+    public AppDataController(AppDataService appDataService, AppDataServiceImpl appDataTemplateRepository, LogService logService) {
         this.appDataService = appDataService;
         this.appDataTemplateRepository = appDataTemplateRepository;
+        this.logService = logService;
     }
 
 
@@ -62,12 +66,15 @@ public class AppDataController {
     public String updateDataEntry(@RequestParam("id") String id, Model model) {
         AppData data = appDataService.findById(id); // either null or valid
         model.addAttribute("appData", data);
+        logService.dataEntryUpdated(data);
         return "data/dataEntryForm";
     }
 
     @GetMapping("/deleteDataEntry")
     public String deleteDataEntry(@ModelAttribute("appData")AppData data) {
+        String id = data.getAppId();
         appDataService.delete(data.getId());
+        logService.dataEntryDeleted(id);
         return "redirect:/data/getAll";
     }
 

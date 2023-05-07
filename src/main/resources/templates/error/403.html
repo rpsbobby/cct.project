@@ -2,13 +2,32 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {background-color: #111827;}
+
+
+    </style>
     <meta charset="UTF-8">
     <title>Unauthorised</title>
 </head>
 <body>
+<div class="bg-white shadow dark:border dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex mx-auto pt-2 pl-10">
+        <a href="#" class="flex items-center mb-6 text-5xl font-semibold text-gray-900 dark:text-gray-300">
+            Analyze
+        </a></div>
+</div>
+<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+        Sorry, It seems that you don't have permission to view this page
+    </h1>
+    <br><br>
+    <div class="text-white p-10 font-serif flex flex-col items-center">
 
-<h1>Sorry, It seems that you don't have permission to view this page</h1>
-<a th:href="/">Go Home</a>
+        <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 p-10 rounded my-2" href="/">Back Home</a>
 
+    </div>
+</div>
 </body>
 </html>

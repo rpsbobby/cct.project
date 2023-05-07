@@ -1,50 +1,71 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {background-color: #111827;}
+
+    </style>
     <meta charset="UTF-8">
     <title>DataSet</title>
 </head>
 <body>
 
-<h1>Data</h1>
+<div class="bg-white shadow dark:border dark:bg-gray-800 dark:border-gray-700 px-5">
+    <div class="flex mx-auto pt-2 pl-10">
+        <a href="#" class="px-3 flex items-center mb-6 text-5xl font-semibold text-gray-900 dark:text-gray-300">
+            Analyze
+        </a>
+        <div class=" px-3 flex items-center" sec:authorize="hasAuthority('ADMIN')">
+            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 p-10 rounded my-2"
+               th:href="@{/api/findAll}">API</a>
+        </div>
+        <form class="px-3 flex items-center" action="#" th:action="@{/logout}" method="post">
+            <input class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 p-10 rounded my-2" type="submit"
+                   value="Logout">
+        </form>
+    </div>
+</div>
+<br><br>
 
-<table>
-    <thead>
-        <tr>
-            <th>App Name</th>
-            <th>App Id</th>
-            <th>Category</th>
-            <th>Rating</th>
-            <th>Is Free</th>
-            <th>Price</th>
-            <th>Size</th>
-            <th>Minimum Android Version</th>
-            <th>Developer Id</th>
-        </tr>
+<div class="text-white p-10 font-serif flex flex-col items-center">
+    <h1>Data</h1>
+    <table class="table-fixed">
+    <tr>
+        <th class="px-4 py-2 text-white-600">App Name</th>
+        <th class="px-4 py-2 text-white-600">App Id</th>
+        <th class="px-4 py-2 text-white-600">Category</th>
+        <th class="px-4 py-2 text-white-600">Rating</th>
+        <th class="px-4 py-2 text-white-600">Is Free</th>
+        <th class="px-4 py-2 text-white-600">Price</th>
+        <th class="px-4 py-2 text-white-600">Size</th>
+        <th class="px-4 py-2 text-white-600">Minimum Android Version</th>
+        <th class="px-4 py-2 text-white-600">Developer Id</th>
+    </tr>
     </thead>
     <tbody>
     <tr th:each="entry : ${dataAll}">
-        <td th:text="${entry.appName}"></td>
-        <td th:text="${entry.appId}"></td>
-        <td th:text="${entry.category}"></td>
-        <td th:text="${entry.rating}"></td>
-        <td th:text="${entry.free}"></td>
-        <td th:text="${entry.price}"></td>
-        <td th:text="${entry.size}"></td>
-        <td th:text="${entry.androidVersion}"></td>
-        <td th:text="${entry.developerId}"></td>
+        <td class="border border-white-500 px-4 py-2 text-white-600 font-medium" th:text="${entry.appName}"></td>
+        <td class="border border-white-500 px-4 py-2 text-white-600 font-medium" th:text="${entry.appId}"></td>
+        <td class="border border-white-500 px-4 py-2 text-white-600 font-medium" th:text="${entry.category}"></td>
+        <td class="border border-white-500 px-4 py-2 text-white-600 font-medium" th:text="${entry.rating}"></td>
+        <td class="border border-white-500 px-4 py-2 text-white-600 font-medium" th:text="${entry.free}"></td>
+        <td class="border border-white-500 px-4 py-2 text-white-600 font-medium" th:text="${entry.price}"></td>
+        <td class="border border-white-500 px-4 py-2 text-white-600 font-medium" th:text="${entry.size}"></td>
+        <td class="border border-white-500 px-4 py-2 text-white-600 font-medium" th:text="${entry.androidVersion}"></td>
+        <td class="border border-white-500 px-4 py-2 text-white-600 font-medium" th:text="${entry.developerId}"></td>
         <td>
-            <a th:href="@{/data/updateDataEntry(id=${entry.id})}">Update</a>
-            <a th:href="@{/data/deleteDataEntry(id=${entry.id})}">Delete</a>
+            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 p-8 rounded my-1" th:href="@{/data/updateDataEntry(id=${entry.id})}">Update</a>
+            <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 p-8 rounded my-1" th:href="@{/data/deleteDataEntry(id=${entry.id})}">Delete</a>
         </td>
 
     </tr>
     </tbody>
 </table>
 
-<div>
-    <a th:href="@{/data/getAll(page=previous)}">Previous</a>
-    <a th:href="@{/data/getAll(page=next)}">Next</a>
+<div class="my-3">
+    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 p-8 rounded my-1" th:href="@{/data/getAll(page=previous)}">Previous</a>
+    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 p-8 rounded my-1" th:href="@{/data/getAll(page=next)}">Next</a>
 </div>
 </body>
 </html>
