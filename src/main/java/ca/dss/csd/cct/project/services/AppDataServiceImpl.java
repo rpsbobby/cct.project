@@ -58,7 +58,7 @@ public class AppDataServiceImpl implements AppDataService {
     }
 
     @Override
-    public void delete(String id) {
-        repository.deleteById(new ObjectId(id));
+    public void delete(ObjectId id) {
+        repository.deleteById(id);
     }
 }

@@ -29,6 +29,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity security) throws Exception {
         security.authorizeHttpRequests(config -> config
+                        .requestMatchers("/css/style.css").permitAll()
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/newUserForm").permitAll()
                         .requestMatchers("/login").permitAll()

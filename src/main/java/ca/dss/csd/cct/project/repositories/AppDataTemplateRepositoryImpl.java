@@ -22,9 +22,13 @@ public class AppDataTemplateRepositoryImpl implements AppDataTemplateRepository 
     @Override
     public void update(AppData appData) {
         // create query with criteria -> id
-        Query query = new Query().addCriteria(Criteria.where("_id").is(appData.getAppId()));
+        Query query = new Query().addCriteria(Criteria.where("_id").is(appData.getId()));
         // replace
-        template.findAndReplace(query,appData);
+        try {
+            template.findAndReplace(query,appData);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }

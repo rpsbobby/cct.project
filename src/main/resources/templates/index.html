@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome | Home</title>
+    <style>
+        body {
+            background-color: #111827;
+        }
+    </style>
 </head>
 <body>
 
-<h1> Hello From Landing Page</h1>
+<h1 class="test"> Hello From Landing Page</h1>
 
 <a href="/login">Login</a>
-<a href="/singUp">Sign Up</a>
+<a href="/newUserForm">Sign Up</a>
 
 <form action="#" th:action="@{/logout}" method="post">
     <input type="submit" value="Logout">

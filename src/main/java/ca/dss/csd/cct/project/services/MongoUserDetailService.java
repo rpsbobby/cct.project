@@ -1,6 +1,7 @@
 package ca.dss.csd.cct.project.services;
 
 import ca.dss.csd.cct.project.entity.MongoUser;
+import ca.dss.csd.cct.project.exceptions.UserException;
 import ca.dss.csd.cct.project.repositories.MongoUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,7 +22,7 @@ public class MongoUserDetailService implements UserDetailsService {
 
     // documentation available at: https://docs.spring.io/spring-security/site/docs/current/api/org/springframework/security/core/userdetails/UserDetailsService.html
 
-    private MongoUserRepository userRepository;
+    private  MongoUserRepository userRepository;
 
 
     @Autowired
@@ -43,13 +44,17 @@ public class MongoUserDetailService implements UserDetailsService {
         return roles.stream().toList();
     }
 
-    public void saveUser(MongoUser user) {
-        // every new user will have a USER authority 
+    public MongoUser saveUser(MongoUser user) throws UserException {
+        MongoUser temp = userRepository.findByUsername(user.getUsername());
+        if(temp != null) {
+            throw new UserException("User with this username already exist");
+        }
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        // every new user will have a USER authority
         SimpleGrantedAuthority role = new SimpleGrantedAuthority("USER");
         Set<GrantedAuthority> roles = new HashSet<>();
         roles.add(role);
         user.setRoles(roles);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 }

@@ -11,14 +11,40 @@
 <form action="#" th:action="@{/data/save}" th:object="${appData}" method="POST">
 
     <input type="hidden" th:field="*{id}">
-    <input type="text" th:field="*{appName}" placeholder="App Name">
-    <input type="text" th:field="*{appId}" placeholder="AppId">
-    <input type="text" th:field="*{category}" placeholder="Category">
-    <input type="text" th:field="*{rating}" placeholder="Rating">
-    <input type="text" th:field="*{free}" placeholder="Free">
-    <input type="text" th:field="*{price}" placeholder="Price">
-    <input type="text" th:field="*{androidVersion}" placeholder="Minimum Android Version">
-    <input type="text" th:field="*{developerId}" placeholder="Developer Id">
+    <input type="hidden" th:field="*{size}">
+    <p>
+        <span th:errors="*{appName}" th:if="${#fields.hasErrors('appName')}"/>
+        <input type="text" th:field="*{appName}" placeholder="App Name">
+    </p>
+    <p>
+        <span th:errors="*{appId}" th:if="${#fields.hasErrors('appId')}"/>
+        <input type="text" th:field="*{appId}" placeholder="AppId">
+    </p>
+    <p>
+        <span th:errors="*{category}" th:if="${#fields.hasErrors('category')}"/>
+        <input type="text" th:field="*{category}" placeholder="Category">
+    </p>
+    <p>
+        <span th:errors="*{rating}" th:if="${#fields.hasErrors('rating')}"/>
+        <input type="text" th:field="*{rating}" placeholder="Rating">
+    </p>
+    <p>
+        <span th:errors="*{free}" th:if="${#fields.hasErrors('free')}"/>
+        <input type="text" th:field="*{free}" placeholder="Free">
+    </p>
+    <p>
+        <span th:errors="*{price}" th:if="${#fields.hasErrors('price')}"/>
+        <input type="text" th:field="*{price}" placeholder="Price">
+    </p>
+    <p>
+        <span th:errors="*{androidVersion}" th:if="${#fields.hasErrors('androidVersion')}"/>
+        <input type="text" th:field="*{androidVersion}" placeholder="Minimum Android Version">
+    </p>
+    <p>
+        <span th:errors="*{developerId}" th:if="${#fields.hasErrors('developerId')}"/>
+        <input type="text" th:field="*{developerId}" placeholder="Developer Id">
+    </p>
+
     <button type="submit">Save</button>
 
 

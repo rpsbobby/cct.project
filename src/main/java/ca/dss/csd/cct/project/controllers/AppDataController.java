@@ -1,12 +1,14 @@
 package ca.dss.csd.cct.project.controllers;
 
 import ca.dss.csd.cct.project.entity.AppData;
+import ca.dss.csd.cct.project.repositories.AppDataTemplateRepository;
 import ca.dss.csd.cct.project.services.AppDataService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Optionals;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.awt.print.Book;
@@ -22,11 +24,13 @@ import java.util.Optional;
 public class AppDataController {
 
     private AppDataService appDataService;
+    private AppDataTemplateRepository appDataTemplateRepository;
     private int currentPage = 1; // default
 
     @Autowired
-    public AppDataController(AppDataService appDataService) {
+    public AppDataController(AppDataService appDataService, AppDataTemplateRepository appDataTemplateRepository) {
         this.appDataService = appDataService;
+        this.appDataTemplateRepository = appDataTemplateRepository;
     }
 
 
@@ -63,13 +67,16 @@ public class AppDataController {
 
     @GetMapping("/deleteDataEntry")
     public String deleteDataEntry(@ModelAttribute("appData")AppData data) {
-        appDataService.delete(data.getId().toString());
+        appDataService.delete(data.getId());
         return "redirect:/data/getAll";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("appData") AppData data) {
-        appDataService.save(data);
+    public String save(@Valid @ModelAttribute("appData") AppData data, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()) {
+            return "data/dataEntryForm";
+        }
+        appDataTemplateRepository.update(data);
         return "redirect:/data/getAll";
     }
 }

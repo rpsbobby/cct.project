@@ -1,12 +1,10 @@
 package ca.dss.csd.cct.project.entity;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.annotation.Collation;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -15,28 +13,28 @@ public class AppData {
 
     @MongoId
     private ObjectId id;
-    @NotBlank
-    @Min(value = 3)@Max(value = 20)
+    @NotBlank(message = "Application name must be longer than 3 characters and shorter than 100")
+    @Size(min = 3, max = 100, message = "Application name must be longer than 3 characters and shorter than 30")
     private String appName;
-    @NotBlank
-    @Min(value = 3)@Max(value = 20)
+    @NotBlank(message = "Id must be between 3 and 20 characters ")
+    @Size(min = 3, max = 100, message = "Id must be between 3 and 100 characters ")
     private String appId;
-    @Min(value = 3)@Max(value = 20)
-    @NotBlank
+    @NotBlank(message = "Category name must be longer than 3 characters")
+    @Size(min = 3, message = "Category name must be longer than 3 characters")
     private String category;
-    @NotBlank
-    @Min(value = 3)@Max(value = 20)
+    @NotBlank(message = "Rating field cannot be empty")
+    @Pattern(regexp = "[0-9]", message = "Price must be a number number only")
     private String rating;
     @NotBlank
-    @Min(value = 4)@Max(value = 5)
+    @Size(min = 4, max = 5, message = "Please, insert True or False")
     private String free;
     @NotBlank
     private String price;
-    @NotBlank
+    @NotBlank(message = "Please, provide application size")
     private String size;
-    @NotBlank
+    @NotBlank(message = "Please, provide minimum android version")
     private String androidVersion;
-    @NotBlank
+    @NotBlank(message = "Developer ID must be provided")
     private String developerId;
 
     public AppData() {}

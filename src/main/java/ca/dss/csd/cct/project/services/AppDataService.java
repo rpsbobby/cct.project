@@ -1,6 +1,7 @@
 package ca.dss.csd.cct.project.services;
 
 import ca.dss.csd.cct.project.entity.AppData;
+import org.bson.types.ObjectId;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface AppDataService {
 
     AppData save(AppData appData);
 
-    void delete(String id);
+    void delete(ObjectId id);
 //    Page<AppData> getNextPage(int pageNo, int pageSize);
 
 }

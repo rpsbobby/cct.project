@@ -1,5 +1,6 @@
 package ca.dss.csd.cct.project.entity;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -18,8 +19,9 @@ public class MongoUser {
     @MongoId
     private ObjectId id;
     @Indexed(unique = true)
+    @NotBlank(message = "Please, provide user name")
     private String username;
-    @NotNull
+    @NotBlank(message = "Please, provide a password")
     private String password;
     private Set<GrantedAuthority> roles;
 
@@ -56,5 +58,17 @@ public class MongoUser {
 
     public void setRoles(Set<GrantedAuthority> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this) {
+            return true;
+        }
+        if(!(obj instanceof MongoUser)) {
+            return false;
+        }
+        MongoUser user = (MongoUser) obj;
+        return user.getUsername().equals(this.username);
     }
 }
